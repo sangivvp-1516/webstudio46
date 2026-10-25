@@ -654,6 +654,8 @@ ul, ol {
 /* Hero Visual Showcase */
 .hero-visual {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero-window-mockup {
@@ -662,6 +664,8 @@ ul, ol {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg), var(--glow-subtle);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .window-header {
@@ -693,6 +697,9 @@ ul, ol {
 
 .window-body {
   padding: 1.75rem;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .code-snippet {
@@ -700,6 +707,10 @@ ul, ol {
   font-size: 0.85rem;
   line-height: 1.7;
   color: #d4d4d8;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .code-keyword { color: #f472b6; }
@@ -1051,12 +1062,24 @@ ul, ol {
   border-radius: var(--radius-xl);
   padding: clamp(2rem, 4vw, 3rem);
   box-shadow: var(--shadow-lg);
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .estimator-grid {
   display: grid;
   grid-template-columns: 1.3fr 0.9fr;
   gap: 2.5rem;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.estimator-controls,
+.estimator-result-box {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .estimator-control-group {
@@ -1100,6 +1123,8 @@ ul, ol {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .addon-checkbox-label {
@@ -1112,6 +1137,9 @@ ul, ol {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: var(--transition-smooth);
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .addon-checkbox-label:hover {
@@ -1149,6 +1177,17 @@ ul, ol {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#estimatorProceedBtn {
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  line-height: 1.35;
+  padding: 0.85rem 1.15rem;
 }
 
 .estimate-output-header {
@@ -1862,15 +1901,22 @@ ul, ol {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+    max-width: 100%;
   }
 
   .about-hero-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+    max-width: 100%;
   }
 
   .estimator-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .estimator-options-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .footer-top-grid {
@@ -1879,28 +1925,212 @@ ul, ol {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .nav-menu,
   .header-cta-btn {
-    display: none;
+    display: none !important;
   }
 
   .mobile-toggle-btn {
-    display: inline-flex;
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  .container,
+  .container-narrow {
+    padding: 0 1.1rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   /* Prevent iOS automatic input zoom overlay that triggers layout distortion */
   .form-input,
   .form-textarea,
-  .form-select {
+  .form-select,
+  .estimator-select {
     font-size: 16px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
-  .form-grid-2 {
+  /* Hero Section Mobile Polish (Fixes 'Start a Project' blowing out to right) */
+  .hero-section {
+    padding: 3rem 0 2.5rem 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .hero-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-content,
+  .hero-visual {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 7.5vw, 2.75rem);
+    line-height: 1.2;
+    word-break: break-word;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-supporting {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.85rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    padding: 0.95rem 1.25rem;
+    box-sizing: border-box;
+    white-space: normal;
+    min-height: 50px;
+  }
+
+  .hero-meta-strip {
+    gap: 1.25rem;
+    padding-top: 1.5rem;
+    width: 100%;
+  }
+
+  .hero-window-mockup {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .window-body {
+    padding: 1rem 0.85rem;
+    overflow-x: auto;
+  }
+
+  pre.code-snippet {
+    font-size: 0.76rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  /* Cost Estimator Mobile Polish (Fixes overlaying and going outside) */
+  .estimator-card {
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .estimator-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .estimator-controls {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .estimator-select {
+    padding: 0.8rem 0.75rem;
+    font-size: 15px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
   }
 
   .estimator-options-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    width: 100%;
+  }
+
+  .addon-checkbox-label {
+    padding: 0.75rem 0.85rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .estimator-result-box {
+    padding: 1.5rem 1.1rem;
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+  }
+
+  .estimate-price-display {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+    margin: 0.35rem 0;
+  }
+
+  #estimatorProceedBtn {
+    width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    padding: 0.95rem 1rem;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    line-height: 1.35;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Final CTA banner */
+  .cta-banner {
+    padding: 2.25rem 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .cta-banner-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .cta-banner-buttons .btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .form-grid-2 {
     grid-template-columns: 1fr;
   }
 
@@ -1936,21 +2166,40 @@ ul, ol {
 }
 
 @media (max-width: 480px) {
+  .container,
+  .container-narrow {
+    padding: 0 0.85rem;
+  }
+
   .hero-headline {
-    font-size: 2.2rem;
+    font-size: 1.95rem;
+    line-height: 1.2;
+  }
+
+  .hero-supporting {
+    font-size: 0.98rem;
+  }
+
+  .hero-meta-strip {
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .estimator-card {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .estimator-result-box {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .addon-checkbox-label {
+    padding: 0.65rem 0.75rem;
   }
 
   .services-grid,
   .portfolio-grid {
     grid-template-columns: 1fr;
-  }
-
-  .hero-cta-group {
-    flex-direction: column;
-  }
-
-  .hero-cta-group .btn {
-    width: 100%;
   }
 
   .wizard-btn-row {
