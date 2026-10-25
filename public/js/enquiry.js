@@ -400,9 +400,6 @@ function initEnquiryWizard() {
                 `-------------------------------------\n` +
                 `Looking forward to your quotation and consultation.`
               );
-              directMailBtn.href = `mailto:webstudio46.in@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-            }
-
             // Pre-fill 1-click WhatsApp dispatch
             if (directWhatsAppBtn) {
               const waText = encodeURIComponent(
@@ -438,7 +435,7 @@ function initEnquiryWizard() {
         btnSubmit.innerHTML = originalSubmitBtnHtml;
 
         formAlert.className = 'form-status-alert alert-error';
-        formAlert.innerHTML = `<strong>Network Connection Issue:</strong> We could not connect to the server. Please check your internet connection or email us directly at <em>webstudio46.in@gmail.com</em>.`;
+        formAlert.innerHTML = `<strong>Network Connection Issue:</strong> We could not connect to the server. Please check your internet connection or reach us directly on WhatsApp at <em>+91 6381827181</em>.`;
         formAlert.style.display = 'block';
       }
     });
