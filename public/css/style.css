@@ -75,6 +75,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scroll-padding-top: 85px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -362,9 +363,14 @@ ul, ol {
   transition: var(--transition-smooth);
 }
 
-.mobile-toggle-btn:hover {
+.mobile-toggle-btn.active {
   background: var(--bg-tertiary);
   border-color: var(--border-medium);
+  color: var(--text-white);
+}
+
+.mobile-toggle-btn.active svg {
+  transform: rotate(90deg);
 }
 
 /* Mobile Nav Drawer */
@@ -384,6 +390,7 @@ ul, ol {
   transform: translateY(-100%);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s;
   z-index: 999;
   border-bottom: 1px solid var(--border-subtle);
@@ -394,6 +401,13 @@ ul, ol {
   transform: translateY(0);
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 769px) {
+  .mobile-nav-panel {
+    display: none !important;
+  }
 }
 
 .mobile-nav-links {
@@ -1824,6 +1838,7 @@ ul, ol {
   z-index: 900;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: var(--transition-smooth);
   box-shadow: var(--shadow-md);
 }
@@ -1831,6 +1846,7 @@ ul, ol {
 .back-to-top.visible {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .back-to-top:hover {
@@ -1873,6 +1889,13 @@ ul, ol {
     display: inline-flex;
   }
 
+  /* Prevent iOS automatic input zoom overlay that triggers layout distortion */
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: 16px;
+  }
+
   .form-grid-2 {
     grid-template-columns: 1fr;
   }
@@ -1903,6 +1926,13 @@ ul, ol {
   .step-label {
     display: none;
   }
+
+  .back-to-top {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1929,6 +1959,34 @@ ul, ol {
 
   .wizard-btn-row .btn {
     width: 100%;
+  }
+
+  .enquiry-wizard-wrap {
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .wizard-progress-bar {
+    margin-bottom: 1.75rem;
+  }
+
+  .wizard-progress-bar::before {
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .modal-backdrop {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .modal-close-btn {
+    top: 1rem;
+    right: 1rem;
   }
 }
 

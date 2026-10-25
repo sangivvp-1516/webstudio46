@@ -41,27 +41,52 @@ function initMobileNavigation() {
 
   function openMenu() {
     navPanel.classList.add('open');
+    toggleBtn.classList.add('active');
     toggleBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
   }
 
   function closeMenu() {
     navPanel.classList.remove('open');
+    toggleBtn.classList.remove('active');
     toggleBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
   toggleBtn.addEventListener('click', toggleMenu);
 
-  // Close menu when clicking on any mobile nav link
+  // Close menu when clicking on any mobile nav link or button
   const mobileLinks = navPanel.querySelectorAll('.mobile-nav-link, .btn');
   mobileLinks.forEach(link => {
     link.addEventListener('click', closeMenu);
   });
 
+  // Close when clicking directly on the empty drawer background
+  navPanel.addEventListener('click', (e) => {
+    if (e.target === navPanel) {
+      closeMenu();
+    }
+  });
+
+  // Close when clicking anywhere outside header and drawer
+  document.addEventListener('click', (e) => {
+    if (navPanel.classList.contains('open') && 
+        !navPanel.contains(e.target) && 
+        !toggleBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
   // Close when pressing Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navPanel.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  // Auto-close and unlock scrolling if screen is resized above mobile breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && navPanel.classList.contains('open')) {
       closeMenu();
     }
   });
