@@ -605,6 +605,10 @@ router.get('/sync', requireAdminAuth, async (req, res) => {
         : result.error
     });
   } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 /**
  * POST /api/enquiry/test-google-sheets
  * Dispatches a test row to Google Sheet Webhook — Protected by PIN
