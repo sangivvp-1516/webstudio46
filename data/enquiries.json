@@ -1,0 +1,52 @@
+[
+  {
+    "id": "WS46-MVNEUSG4-3Q0I",
+    "createdAt": "2026-10-25T05:52:15.685Z",
+    "formattedDate": "25 Oct 2026, 11:22 am",
+    "customer": {
+      "fullName": "Arun Kumar",
+      "email": "client.test@example.com",
+      "phone": "+91 9876543210",
+      "businessName": "Kumar Organic Spices"
+    },
+    "project": {
+      "service": "Business Showcase Website",
+      "title": "E-commerce &amp; Brand Showcase for Spices",
+      "description": "Need a fast modern website with product catalogue, WhatsApp ordering, customer reviews, and contact form for Gobichettipalayam spices brand.",
+      "budget": "₹9,999",
+      "timeline": "2 weeks",
+      "referenceUrl": "https://example.com/showcase"
+    },
+    "status": "Received",
+    "emailDelivery": {
+      "studioNotificationSent": false,
+      "customerConfirmationSent": false,
+      "details": "Local storage recorded. SMTP credentials pending configuration."
+    }
+  },
+  {
+    "id": "WS46-MVNC5WBZ-TNOO",
+    "createdAt": "2026-10-25T04:36:55.125Z",
+    "formattedDate": "25 Oct 2026, 10:06 am",
+    "customer": {
+      "fullName": "Sangiv VP",
+      "email": "webstudio46.in@gmail.com",
+      "phone": "+91 6381827181",
+      "businessName": "Web Studio 46"
+    },
+    "project": {
+      "service": "Personal Portfolio Website",
+      "title": "Official Studio Showcase",
+      "description": "Live presentation test enquiry for Web Studio 46 studio portfolio verification.",
+      "budget": "₹1,999",
+      "timeline": "1 week",
+      "referenceUrl": "https://instagram.com/web_studio_46"
+    },
+    "status": "Received",
+    "emailDelivery": {
+      "studioNotificationSent": false,
+      "customerConfirmationSent": false,
+      "details": "Local storage recorded. SMTP credentials pending configuration."
+    }
+  }
+]

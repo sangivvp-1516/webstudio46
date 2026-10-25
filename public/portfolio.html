@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio &amp; Selected Concepts — WEB STUDIO 46</title>
+  <meta name="description" content="Explore demonstration and concept projects crafted by WEB STUDIO 46, founded by Sangiv VP Showcasing digital greetings, developer portfolios, business sites, and web applications.">
+  <link rel="icon" type="image/png" href="/favicon.png?v=4">
+  <link rel="apple-touch-icon" href="/favicon.png?v=4">
+  <link rel="stylesheet" href="/css/style.css?v=4">
+  <meta property="og:image" content="/images/logo.png?v=4">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-logo" aria-label="WEB STUDIO 46 Homepage">
+        <img src="/images/logo.png?v=4" alt="WEB STUDIO 46" class="brand-logo-img" width="130" height="40" style="height: 40px; width: auto; max-height: 40px; max-width: 130px; object-fit: contain; display: block; flex-shrink: 0;">
+      </a>
+
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <a href="/pricing.html" class="nav-link">Pricing</a>
+        <a href="/portfolio.html" class="nav-link active">Work</a>
+        <a href="/how-it-works.html" class="nav-link">Process</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/enquiry.html" class="btn btn-primary btn-sm header-cta-btn">Start a Project</a>
+        <button type="button" class="mobile-toggle-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Panel -->
+  <div class="mobile-nav-panel" id="mobileNavPanel">
+    <div class="mobile-nav-links">
+      <a href="/" class="mobile-nav-link">Home <span>&rarr;</span></a>
+      <a href="/services.html" class="mobile-nav-link">Services <span>&rarr;</span></a>
+      <a href="/pricing.html" class="mobile-nav-link">Pricing <span>&rarr;</span></a>
+      <a href="/portfolio.html" class="mobile-nav-link active">Work <span>&rarr;</span></a>
+      <a href="/how-it-works.html" class="mobile-nav-link">Process <span>&rarr;</span></a>
+      <a href="/about.html" class="mobile-nav-link">About <span>&rarr;</span></a>
+      <a href="/contact.html" class="mobile-nav-link">Contact <span>&rarr;</span></a>
+      <a href="/faq.html" class="mobile-nav-link">FAQ <span>&rarr;</span></a>
+    </div>
+    <div class="mobile-nav-footer">
+      <a href="/enquiry.html" class="btn btn-primary btn-block">Start a Project</a>
+      <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin: 0;">
+        WEB STUDIO 46 &bull; Founded by Sangiv VP
+      </p>
+    </div>
+  </div>
+
+  <main id="mainContent">
+
+    <!-- Header Section -->
+    <section class="section" style="padding-bottom: 2rem;">
+      <div class="container text-center">
+        <div class="section-eyebrow">Studio Showcase</div>
+        <h1 class="section-heading">Selected Work &amp; Concepts</h1>
+        <p class="section-subtext" style="margin: 0 auto 2.5rem auto;">
+          Browse through demonstration models and concept prototypes developed by WEB STUDIO 46. We prioritize clean craftsmanship, fast load times, and authentic UI design.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="filter-tabs" role="tablist" aria-label="Portfolio Filters">
+          <button type="button" class="filter-btn active" data-filter="all">All Projects</button>
+          <button type="button" class="filter-btn" data-filter="portfolio">Portfolio</button>
+          <button type="button" class="filter-btn" data-filter="business">Business</button>
+          <button type="button" class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+          <button type="button" class="filter-btn" data-filter="greetings">Digital Greetings</button>
+          <button type="button" class="filter-btn" data-filter="webapp">Web Applications</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Gallery Grid -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="portfolio-grid" id="portfolioGallery">
+
+          <!-- Project 1: Personal Portfolio -->
+          <div class="portfolio-card" data-category="portfolio">
+            <div class="portfolio-thumbnail-wrap">
+              <span class="portfolio-badge-pill">Portfolio</span>
+              <span class="concept-watermark">Concept Project</span>
+              <img src="/images/portfolio-personal.svg" alt="Minimalist Developer Portfolio Concept" loading="lazy">
+            </div>
+            <div class="portfolio-body">
+              <h3 class="portfolio-title">Minimalist Developer Portfolio</h3>
+              <p class="portfolio-desc">
+                High-contrast personal profile layout featuring terminal hero, project overview cards with tech tags, and recruiter resume download button.
+              </p>
+              <div class="portfolio-tags">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">Vanilla JS</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm"
+                data-modal-target="projectModal"
+                data-title="Minimalist Developer Portfolio"
+                data-badge="Portfolio Demo Concept"
+                data-desc="Crafted for software developers, engineers, and creators seeking a refined black &amp; white online home. Prioritizes clear skills hierarchy, accessible typography, and instantaneous load times."
+                data-features="Clean dark-mode visual hierarchy|Recruiter resume download trigger|Direct mailto/form connection|100% accessible keyboard navigation"
+                data-tech="HTML5, CSS3, Vanilla JavaScript">
+                View Concept Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2: Business Agency -->
+          <div class="portfolio-card" data-category="business">
+            <div class="portfolio-thumbnail-wrap">
+              <span class="portfolio-badge-pill">Business</span>
+              <span class="concept-watermark">Concept Project</span>
+              <img src="/images/portfolio-business.svg" alt="Consulting Agency Showcase Concept" loading="lazy">
+            </div>
+            <div class="portfolio-body">
+              <h3 class="portfolio-title">Consulting Agency Showcase</h3>
+              <p class="portfolio-desc">
+                Multi-section corporate website for service consultants featuring an interactive consultation booking workflow, client trust points, and Google Map.
+              </p>
+              <div class="portfolio-tags">
+                <span class="tech-tag">Responsive UI</span>
+                <span class="tech-tag">Lead Form</span>
+                <span class="tech-tag">SEO Ready</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm"
+                data-modal-target="projectModal"
+                data-title="Consulting Agency Showcase"
+                data-badge="Business Demo Concept"
+                data-desc="Built to present service providers, consultancies, and clinics with unmistakable authority. Features high-converting call-to-actions and full mobile optimization."
+                data-features="5-page structured layout|Direct WhatsApp click-to-chat|Google Maps interactive embed|On-page SEO semantic structure"
+                data-tech="HTML5, CSS3, Express API, Vanilla JS">
+                View Concept Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 3: Birthday Celebration Greeting -->
+          <div class="portfolio-card" data-category="greetings">
+            <div class="portfolio-thumbnail-wrap">
+              <span class="portfolio-badge-pill">Digital Greeting</span>
+              <span class="concept-watermark">Demo Project</span>
+              <img src="/images/portfolio-greetings.svg" alt="Celebratory Birthday Experience Concept" loading="lazy">
+            </div>
+            <div class="portfolio-body">
+              <h3 class="portfolio-title">Celebratory Birthday Experience</h3>
+              <p class="portfolio-desc">
+                Heartwarming web greeting built to surprise loved ones on their special day with confetti animations, memory timeline, and tap-to-reveal messages.
+              </p>
+              <div class="portfolio-tags">
+                <span class="tech-tag">Animations</span>
+                <span class="tech-tag">Confetti</span>
+                <span class="tech-tag">Mobile Link</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm"
+                data-modal-target="projectModal"
+                data-title="Celebratory Birthday Experience"
+                data-badge="Digital Greeting Demo"
+                data-desc="An interactive celebration webpage created to replace generic paper greeting cards. Visitors experience a joyful surprise animation upon loading, followed by photo memories and celebratory wishes."
+                data-features="Dynamic entrance confetti cannon|Curated photo memories layout|Tap-to-reveal surprise message card|Instant WhatsApp shareable link"
+                data-tech="HTML5, CSS Animations, Vanilla JavaScript">
+                View Concept Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 4: Creator Media Grid -->
+          <div class="portfolio-card" data-category="portfolio">
+            <div class="portfolio-thumbnail-wrap">
+              <span class="portfolio-badge-pill">Portfolio</span>
+              <span class="concept-watermark">Concept Project</span>
+              <img src="/images/portfolio-creator.svg" alt="Visual Creator Portfolio Concept" loading="lazy">
+            </div>
+            <div class="portfolio-body">
+              <h3 class="portfolio-title">Visual Creator Portfolio</h3>
+              <p class="portfolio-desc">
+                Grid-based media showcase designed for photographers, digital artists, and writers. Features lightbox preview and social embeds.
+              </p>
+              <div class="portfolio-tags">
+                <span class="tech-tag">Media Grid</span>
+                <span class="tech-tag">Lightbox</span>
+                <span class="tech-tag">Creator UI</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm"
+                data-modal-target="projectModal"
+                data-title="Visual Creator Portfolio"
+                data-badge="Creator Demo Concept"
+                data-desc="Tailored for visual creators who need their work to take center stage. Built with smooth modal viewers and filterable categories for commercial, editorial, and personal projects."
+                data-features="High-resolution image grid|Interactive modal preview dialog|Direct inquiry button on every piece|Social links &amp; newsletter capture"
+                data-tech="HTML5, CSS3, Vanilla JavaScript">
+                View Concept Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 5: E-commerce Store -->
+          <div class="portfolio-card" data-category="ecommerce">
+            <div class="portfolio-thumbnail-wrap">
+              <span class="portfolio-badge-pill">E-Commerce</span>
+              <span class="concept-watermark">Concept Project</span>
+              <img src="/images/portfolio-ecommerce.svg" alt="Modern Retail E-Commerce Concept" loading="lazy">
+            </div>
+            <div class="portfolio-body">
+              <h3 class="portfolio-title">Modern Retail Storefront</h3>
+              <p class="portfolio-desc">
+                Interactive retail catalogue concept featuring product search, responsive cart drawer, checkout validation, and payment gateway simulation.
+              </p>
+              <div class="portfolio-tags">
+                <span class="tech-tag">Product Catalog</span>
+                <span class="tech-tag">Cart Flow</span>
+                <span class="tech-tag">Checkout</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm"
+                data-modal-target="projectModal"
+                data-title="Modern Retail Storefront"
+                data-badge="E-Commerce Demo Concept"
+                data-desc="A sleek e-commerce shopping experience demonstrating fast client-side catalogue filtering, responsive sliding cart drawer, and order confirmation logic."
+                data-features="Instant product search &amp; filter|Slide-in shopping cart panel|Clear pricing breakdown|Payment gateway integration blueprint"
+                data-tech="HTML5, CSS3, JavaScript, Express API">
+                View Concept Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 6: Web Application Dashboard -->
+          <div class="portfolio-card" data-category="webapp">
+            <div class="portfolio-thumbnail-wrap">
+              <span class="portfolio-badge-pill">Web Application</span>
+              <span class="concept-watermark">Concept Project</span>
+              <img src="/images/portfolio-webapp.svg" alt="Analytics Management Dashboard Concept" loading="lazy">
+            </div>
+            <div class="portfolio-body">
+              <h3 class="portfolio-title">Analytics &amp; Control Dashboard</h3>
+              <p class="portfolio-desc">
+                Custom business control panel with metric visualization cards, dynamic SVG trend charts, and role-based data view filters.
+              </p>
+              <div class="portfolio-tags">
+                <span class="tech-tag">Dashboard</span>
+                <span class="tech-tag">Node API</span>
+                <span class="tech-tag">Charts</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm"
+                data-modal-target="projectModal"
+                data-title="Analytics &amp; Control Dashboard"
+                data-badge="Web Application Demo Concept"
+                data-desc="Engineered to demonstrate back-office data management capabilities. Built with lightweight SVG charts, responsive table views, and clean Node.js Express endpoints."
+                data-features="Live metric summary cards|Responsive vector charts|Filterable customer data table|Modular Express backend structure"
+                data-tech="Node.js, Express, HTML5, CSS3, Vanilla JS">
+                View Concept Details
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Notice -->
+    <section class="section" style="padding-top: 1rem;">
+      <div class="container container-narrow text-center">
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+          <strong>Studio Notice:</strong> All projects displayed above represent demonstration concepts and architectural prototypes created by WEB STUDIO 46 to illustrate our design quality, frontend performance, and code standards. We do not invent fake client testimonials or fabricated live links.
+        </p>
+        <div style="margin-top: 2rem;">
+          <a href="/enquiry.html" class="btn btn-primary">Start Your Own Custom Project &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Reusable Project Modal -->
+  <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div style="margin-bottom: 1rem;">
+        <span class="service-badge" id="modalBadge">Concept Project</span>
+        <h3 id="modalTitle" style="font-size: 1.5rem; margin-top: 0.5rem;">Project Title</h3>
+      </div>
+      <p id="modalDesc" style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+        Project description here.
+      </p>
+      
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.75rem;">Key Highlights</h4>
+        <ul id="modalFeatures" style="display: flex; flex-direction: column; gap: 0.5rem;"></ul>
+      </div>
+
+      <div style="margin-bottom: 1.75rem;">
+        <h4 style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.75rem;">Technologies Used</h4>
+        <div id="modalTech" class="portfolio-tags"></div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+        <a href="/enquiry.html" class="btn btn-primary btn-block">Enquire for Similar Project</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a href="/" class="brand-logo" aria-label="WEB STUDIO 46 Homepage">
+            <img src="/images/logo.png?v=4" alt="WEB STUDIO 46" class="brand-logo-img" width="130" height="40" style="height: 40px; width: auto; max-height: 40px; max-width: 130px; object-fit: contain; display: block; flex-shrink: 0;">
+          </a>
+          <p>“Your Vision. Our Digital Craft.”<br>Founded by Sangiv VP</p>
+          <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+            <strong>Location:</strong> Gobichettipalayam, Erode Dt, Tamil Nadu, India
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="/" class="footer-link">Home</a></li>
+            <li><a href="/services.html" class="footer-link">Services</a></li>
+            <li><a href="/pricing.html" class="footer-link">Pricing</a></li>
+            <li><a href="/portfolio.html" class="footer-link">Work</a></li>
+            <li><a href="/how-it-works.html" class="footer-link">Process</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Services</h4>
+          <ul class="footer-links">
+            <li><a href="/services.html#greetings" class="footer-link">Digital Greetings (₹99)</a></li>
+            <li><a href="/services.html#portfolios" class="footer-link">Portfolios (₹350)</a></li>
+            <li><a href="/services.html#portfolios" class="footer-link">Business Websites (₹1,999)</a></li>
+            <li><a href="/services.html#ecommerce" class="footer-link">E-commerce (₹10,000)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Direct Connect</h4>
+          <ul class="footer-links">
+            <li><span class="footer-link" style="color: #ffffff; font-weight: 600;">Sangiv VP (Founder)</span></li>
+            <li><a href="mailto:webstudio46.in@gmail.com" class="footer-link">webstudio46.in@gmail.com</a></li>
+            <li><a href="tel:+916381827181" class="footer-link">+91 6381827181</a></li>
+            <li><a href="https://wa.me/916381827181" target="_blank" rel="noopener noreferrer" class="footer-link">WhatsApp: +91 6381827181 &rarr;</a></li>
+            <li><a href="https://instagram.com/web_studio_46" target="_blank" rel="noopener noreferrer" class="footer-link" style="color: #f472b6;">Instagram: @web_studio_46 &rarr;</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 WEB STUDIO 46. Founded by Sangiv VP All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms and Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
