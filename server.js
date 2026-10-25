@@ -13,6 +13,7 @@ const rateLimit = require('express-rate-limit');
 
 const enquiryRouter = require('./routes/enquiry');
 const { services, pricingDisclaimer } = require('./config/services');
+const { syncExcelFile } = require('./utils/excelStorage');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,10 +44,10 @@ const generalLimiter = rateLimit({
 });
 app.use('/api/', generalLimiter);
 
-// Specific Rate Limiter for Enquiry Submissions (10 enquiries per 15 minutes per IP)
+// Specific Rate Limiter for Enquiry Submissions (15 enquiries per 15 minutes per IP)
 const enquiryLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 15,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
@@ -55,8 +56,13 @@ const enquiryLimiter = rateLimit({
   }
 });
 
-// API Routes
-app.use('/api/enquiry', enquiryLimiter, enquiryRouter);
+// API Routes (Apply submission limiter only to POST requests, allowing unrestricted admin export)
+app.use('/api/enquiry', (req, res, next) => {
+  if (req.method === 'POST') {
+    return enquiryLimiter(req, res, next);
+  }
+  next();
+}, enquiryRouter);
 
 // Service configuration endpoint for frontend dynamic features & cost estimator
 app.get('/api/services', (req, res) => {
@@ -112,7 +118,11 @@ if (!process.env.VERCEL) {
     console.log(` Founder: Sangiv VP`);
     console.log(` Running on: http://localhost:${PORT}`);
     console.log(` Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(` Enquiries Excel: data/enquiries.xlsx (Automated)`);
     console.log(`====================================================`);
+
+    // Verify and synchronize Excel spreadsheet on server start
+    syncExcelFile().catch(() => {});
   });
 
   // Graceful termination handling

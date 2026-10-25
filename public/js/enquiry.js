@@ -400,6 +400,9 @@ function initEnquiryWizard() {
                 `-------------------------------------\n` +
                 `Looking forward to your quotation and consultation.`
               );
+              directMailBtn.href = `mailto:webstudio46.in@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+            }
+
             // Pre-fill 1-click WhatsApp dispatch
             if (directWhatsAppBtn) {
               const waText = encodeURIComponent(

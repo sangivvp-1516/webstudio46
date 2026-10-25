@@ -1,5 +1,55 @@
 [
   {
+    "id": "WS46-MVNW7N9B-0TD4",
+    "createdAt": "2026-10-25T13:58:09.020Z",
+    "formattedDate": "25 Oct 2026, 7:28 pm",
+    "customer": {
+      "fullName": "SANGIV V P",
+      "email": "sangivvp@gmail.com",
+      "phone": "9363526281",
+      "businessName": "helloworld"
+    },
+    "project": {
+      "service": "Birthday Website",
+      "title": "website",
+      "description": "ahjahjadghagfhd",
+      "budget": "To be discussed",
+      "timeline": "Flexible",
+      "referenceUrl": "None provided"
+    },
+    "status": "Received",
+    "emailDelivery": {
+      "studioNotificationSent": false,
+      "customerConfirmationSent": false,
+      "details": "Local storage recorded. SMTP credentials pending configuration."
+    }
+  },
+  {
+    "id": "WS46-MVNVUINQ-G71C",
+    "createdAt": "2026-10-25T13:47:56.533Z",
+    "formattedDate": "25 Oct 2026, 7:17 pm",
+    "customer": {
+      "fullName": "Kavitha Rajendran",
+      "email": "kavitha.textiles@gmail.com",
+      "phone": "+91 9443322110",
+      "businessName": "Rajendran Handlooms Gobichettipalayam"
+    },
+    "project": {
+      "service": "E-Commerce Digital Store",
+      "title": "Silk Sarees &amp; Handloom Online Store",
+      "description": "Need a premium e-commerce website with Tamil &amp; English language support, Razorpay payment gateway, WhatsApp live chat for customer assistance, and automated billing.",
+      "budget": "₹14,999",
+      "timeline": "3 weeks",
+      "referenceUrl": "https://example-handlooms.com"
+    },
+    "status": "Received",
+    "emailDelivery": {
+      "studioNotificationSent": false,
+      "customerConfirmationSent": false,
+      "details": "Local storage recorded. SMTP credentials pending configuration."
+    }
+  },
+  {
     "id": "WS46-MVNEUSG4-3Q0I",
     "createdAt": "2026-10-25T05:52:15.685Z",
     "formattedDate": "25 Oct 2026, 11:22 am",

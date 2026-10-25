@@ -15,6 +15,12 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const {
+  syncExcelFile,
+  generateExcelBuffer,
+  generateCsvData,
+  EXCEL_FILE_PATH
+} = require('../utils/excelStorage');
 
 // Path to persistent data storage (Uses /tmp on Vercel's serverless read-only filesystem)
 const ENQUIRIES_FILE = process.env.VERCEL
@@ -240,6 +246,40 @@ router.post('/', async (req, res) => {
     enquiries.unshift(enquiryRecord);
     saveEnquiries(enquiries);
 
+    // Synchronize to Excel workbook in data/enquiries.xlsx in real-time
+    syncExcelFile().catch(err => {
+      console.error('[EXCEL SYNC ERROR]', err.message);
+    });
+
+    // Optional: Synchronize to live Google Sheets in Google Drive via Webhook (Works 24/7 in cloud hosting)
+    const sheetsWebhook = (process.env.GOOGLE_SHEETS_WEBHOOK_URL || '').trim();
+    if (sheetsWebhook) {
+      try {
+        fetch(sheetsWebhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          redirect: 'follow',
+          body: JSON.stringify({
+            enquiryId,
+            date: formattedDate,
+            fullName: cleanFullName,
+            email: cleanEmail,
+            phone: cleanPhone,
+            businessName: cleanBusinessName,
+            service: cleanService,
+            projectTitle: cleanProjectTitle,
+            description: cleanProjectDescription,
+            budget: cleanBudget,
+            timeline: cleanTimeline,
+            referenceUrl: cleanReferenceUrl,
+            status: 'Received'
+          })
+        })
+        .then(res => console.log(`[GOOGLE SHEETS SYNC] Synced ${enquiryId} to Google Sheets (Status: ${res.status})`))
+        .catch(err => console.log('[GOOGLE SHEETS NOTICE]', err.message));
+      } catch (_) {}
+    }
+
     // Attempt Nodemailer Email Automation
     const transporter = createTransporter();
     const studioEmail = process.env.STUDIO_EMAIL || 'webstudio46.in@gmail.com';
@@ -427,6 +467,185 @@ router.post('/', async (req, res) => {
     return res.status(500).json({
       success: false,
       message: 'We encountered an unexpected issue while saving your enquiry. Please try again or reach out directly.'
+    });
+  }
+});
+
+/**
+ * Admin Authentication Middleware
+ * Protects client data and Excel exports with founder PIN
+ */
+function requireAdminAuth(req, res, next) {
+  const configuredPin = (process.env.ADMIN_PIN || '4646').trim();
+  const providedPin = (
+    req.headers['x-admin-pin'] ||
+    req.query.pin ||
+    (req.body && req.body.pin) ||
+    ''
+  ).toString().trim();
+
+  if (providedPin && providedPin === configuredPin) {
+    return next();
+  }
+
+  return res.status(401).json({
+    success: false,
+    message: 'Access Denied: Private Studio PIN required. Only founder Sangiv VP can view enquiries.'
+  });
+}
+
+/**
+ * POST /api/enquiry/verify-pin
+ * Verifies admin PIN from dashboard login screen
+ */
+router.post('/verify-pin', (req, res) => {
+  const configuredPin = (process.env.ADMIN_PIN || '4646').trim();
+  const providedPin = (req.body && req.body.pin || '').toString().trim();
+
+  if (providedPin === configuredPin) {
+    return res.json({ success: true, message: 'Authentication successful.' });
+  }
+  return res.status(401).json({ success: false, message: 'Incorrect Studio PIN.' });
+});
+
+/**
+ * GET /api/enquiry/export-excel
+ * Downloads the complete client enquiries Excel spreadsheet (.xlsx) — Protected by PIN
+ */
+router.get('/export-excel', requireAdminAuth, async (req, res) => {
+  try {
+    const { buffer, count } = await generateExcelBuffer();
+    const dateStamp = new Date().toISOString().slice(0, 10);
+    const filename = `web_studio_46_enquiries_${dateStamp}.xlsx`;
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    return res.send(buffer);
+  } catch (error) {
+    console.error('[EXCEL EXPORT ERROR]', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to generate Excel file: ' + error.message
+    });
+  }
+});
+
+/**
+ * GET /api/enquiry/export-csv
+ * Downloads the client enquiries in standard CSV format — Protected by PIN
+ */
+router.get('/export-csv', requireAdminAuth, (req, res) => {
+  try {
+    const csvData = generateCsvData();
+    const dateStamp = new Date().toISOString().slice(0, 10);
+    const filename = `web_studio_46_enquiries_${dateStamp}.csv`;
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    return res.send(csvData);
+  } catch (error) {
+    console.error('[CSV EXPORT ERROR]', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to generate CSV file: ' + error.message
+    });
+  }
+});
+
+/**
+ * GET /api/enquiry/all
+ * Returns all recorded client enquiries for dashboard display — Protected by PIN
+ */
+router.get('/all', requireAdminAuth, (req, res) => {
+  try {
+    const enquiries = readEnquiries();
+    const excelExists = fs.existsSync(EXCEL_FILE_PATH);
+    return res.json({
+      success: true,
+      count: enquiries.length,
+      excelAvailable: excelExists,
+      excelFilePath: EXCEL_FILE_PATH,
+      enquiries
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Unable to retrieve enquiries.'
+    });
+  }
+});
+
+/**
+ * GET /api/enquiry/sync
+ * Manually forces re-synchronization of Excel sheet — Protected by PIN
+ */
+router.get('/sync', requireAdminAuth, async (req, res) => {
+  try {
+    const result = await syncExcelFile();
+    return res.json({
+      success: result.success,
+      count: result.count,
+      filePath: result.filePath,
+      message: result.success
+        ? `Successfully synced ${result.count} enquiries into Excel workbook.`
+        : result.error
+    });
+  } catch (error) {
+/**
+ * POST /api/enquiry/test-google-sheets
+ * Dispatches a test row to Google Sheet Webhook — Protected by PIN
+ */
+router.post('/test-google-sheets', requireAdminAuth, async (req, res) => {
+  const webhookUrl = (process.env.GOOGLE_SHEETS_WEBHOOK_URL || '').trim();
+  if (!webhookUrl) {
+    return res.status(400).json({
+      success: false,
+      message: 'GOOGLE_SHEETS_WEBHOOK_URL is not configured in .env yet.'
+    });
+  }
+
+  try {
+    const formattedDate = new Date().toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'medium',
+      timeStyle: 'short'
+    });
+    const testId = 'TEST-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      redirect: 'follow',
+      body: JSON.stringify({
+        enquiryId: testId,
+        date: formattedDate,
+        fullName: 'Sangiv VP (Test Lead)',
+        email: 'webstudio46.in@gmail.com',
+        phone: '+91 6381827181',
+        businessName: 'Web Studio 46',
+        service: 'Connection Verification',
+        projectTitle: 'Google Sheets Automation Verification',
+        description: 'Test entry verifying live automated Google Sheet sync from Web Studio 46.',
+        budget: '₹0',
+        timeline: 'Immediate',
+        referenceUrl: 'https://webstudio46.in',
+        status: 'Verified'
+      })
+    });
+
+    return res.json({
+      success: true,
+      message: `Test record (${testId}) sent to Google Sheet successfully! (Status: ${response.status})`,
+      testId
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: 'Error sending to Google Sheet: ' + err.message
     });
   }
 });
