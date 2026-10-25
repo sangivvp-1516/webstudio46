@@ -32,6 +32,13 @@ const JSON_FILE_PATH = process.env.VERCEL
 function readEnquiriesData() {
   try {
     if (!fs.existsSync(JSON_FILE_PATH)) {
+      const defaultDataPath = path.join(__dirname, '..', 'data', 'enquiries.json');
+      if (fs.existsSync(defaultDataPath)) {
+        try {
+          const raw = fs.readFileSync(defaultDataPath, 'utf8');
+          return JSON.parse(raw || '[]');
+        } catch (_) {}
+      }
       return [];
     }
     const raw = fs.readFileSync(JSON_FILE_PATH, 'utf8');

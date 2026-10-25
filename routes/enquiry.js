@@ -33,7 +33,17 @@ const ENQUIRIES_FILE = process.env.VERCEL
 function readEnquiries() {
   try {
     if (!fs.existsSync(ENQUIRIES_FILE)) {
-      fs.writeFileSync(ENQUIRIES_FILE, JSON.stringify([], null, 2), 'utf8');
+      const defaultDataPath = path.join(__dirname, '..', 'data', 'enquiries.json');
+      if (fs.existsSync(defaultDataPath)) {
+        try {
+          const seed = fs.readFileSync(defaultDataPath, 'utf8');
+          fs.writeFileSync(ENQUIRIES_FILE, seed, 'utf8');
+          return JSON.parse(seed || '[]');
+        } catch (_) {}
+      }
+      try {
+        fs.writeFileSync(ENQUIRIES_FILE, JSON.stringify([], null, 2), 'utf8');
+      } catch (_) {}
       return [];
     }
     const data = fs.readFileSync(ENQUIRIES_FILE, 'utf8');
